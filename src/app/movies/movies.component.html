@@ -1,0 +1,12 @@
+<h1>Movies</h1>
+
+  <div *ngFor="let movie of movies$">
+   <!--  <a routerLink="/details/{{user.id}}">{{ user.name }}</a> -->
+
+    <div>
+      ID: {{ movie.id }}
+      <br/>
+      Name:  <a routerLink="/movie/{{movie.id}}"  (href)="fetchMovie()">{{ movie.title }}</a>
+    </div>
+    <br/>
+  </div>

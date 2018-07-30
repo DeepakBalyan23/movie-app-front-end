@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs';
+import{Router, ActivatedRoute, ParamMap} from '@angular/router';
 
 @Component({
   selector: 'app-movie-page',
@@ -8,11 +9,12 @@ import { Observable } from 'rxjs';
   styleUrls: ['./movie-page.component.css']
 })
 export class MoviePageComponent implements OnInit {
-  movie;
-  constructor(private data:DataService) { }
-
+  constructor(private data:DataService, private router: Router, private route:ActivatedRoute) { }
+  movieId;
+  movie: Object;
   ngOnInit() {
-    this.data.getMovie().subscribe(
+    this.route.paramMap.subscribe((param: ParamMap)=>this.movieId=parseInt(param.get('id')));
+    this.data.getMovie(this.movieId).subscribe(
       data => this.movie = data 
     );
   }

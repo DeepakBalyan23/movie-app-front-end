@@ -12,7 +12,7 @@ export class DataService {
     return this.http.get('http://localhost:8092/movie/api/v1/movies')
   }
 
-  getMovie() {
-    return this.http.get('http://localhost:8092/movie/api/v1'+this.router.url)
+  getMovie(id) {
+    return this.http.get('http://localhost:8092/movie/api/v1/movie/'+id)
   }
 }

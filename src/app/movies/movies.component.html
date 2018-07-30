@@ -6,7 +6,7 @@
     <div>
       ID: {{ movie.id }}
       <br/>
-      Name:  <a routerLink="/movie/{{movie.id}}"  (href)="fetchMovie()">{{ movie.title }}</a>
+      Name:  <a (click)="fetchMovie(movie.id)">{{ movie.title }}</a>
     </div>
     <br/>
   </div>

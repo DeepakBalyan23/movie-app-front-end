@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs';
+import{Router} from '@angular/router';
 
 @Component({
   selector: 'app-movies',
@@ -9,20 +10,14 @@ import { Observable } from 'rxjs';
 })
 export class MoviesComponent implements OnInit {
   movies$: Object;
-  movie:Object;
-  id;
-  constructor(private data: DataService) { }
+  constructor(private data: DataService, private router:Router) { }
 
   ngOnInit() {
     this.data.getMovies().subscribe(
       data => this.movies$ = data 
     );
   }
-
-  fetchMovie(){
-    this.data.getMovie().subscribe(
-      data => this.movie = data 
-    );
+  fetchMovie(id){
+    this.router.navigate(['/movie', id]);
   }
-
 }

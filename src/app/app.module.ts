@@ -10,6 +10,7 @@ import { MoviePageComponent } from './movie-page/movie-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import{MaterialModule} from './material';
 import { MovieCardComponent } from './movies/movie-card/movie-card.component';
+import { AlertsModule } from 'angular-alert-module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { MovieCardComponent } from './movies/movie-card/movie-card.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
+    AlertsModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

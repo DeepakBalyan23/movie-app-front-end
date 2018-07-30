@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from '../data.service';
-import { Observable } from 'rxjs';
 import{Router} from '@angular/router';
 import { Movie } from '../movie';
+import { AlertsService } from 'angular-alert-module';
 
 @Component({
   selector: 'app-movies',
@@ -13,8 +13,8 @@ export class MoviesComponent implements OnInit {
   movies$: Object;
   movie = new Movie();
   dbMovies:Object;
-  id=100;
-  constructor(private data: DataService, private router:Router) { }
+  id=1000;
+  constructor(private data: DataService, private router:Router, private alert:AlertsService) { }
 
   ngOnInit() {
     this.fetchOmdbMovies();
@@ -45,10 +45,11 @@ export class MoviesComponent implements OnInit {
     this.data.saveMovie(this.movie).subscribe(
       data=>this.movie=data
     );
+    this.alert.setMessage('Saved successfully!','success');
   }
   deleteMovie(movie){
     this.data.deleteMovie(movie).subscribe(
-      
     );
+    this.alert.setMessage('Deleted successfully!','success');
   }
 }

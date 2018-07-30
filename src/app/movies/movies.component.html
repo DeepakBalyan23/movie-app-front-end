@@ -6,9 +6,9 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <br/>
-<mat-grid-list cols="4" rowHeight="100px">
+<mat-grid-list cols="12" rowHeight="100px">
   <div *ngFor="let movie of movies$">
-    <mat-grid-tile colspan="1" rowspan="6">
+    <mat-grid-tile colspan="4" rowspan="6">
       <mat-card class="example-card">
         <app-movie-card [title]="movie.Title" [poster]="movie.Poster" [year]="movie.Year"></app-movie-card>
         <mat-card-actions>
@@ -18,7 +18,7 @@
     </mat-grid-tile>
   </div>
   <div *ngFor="let movie of dbMovies">
-      <mat-grid-tile colspan="1" rowspan="6">
+      <mat-grid-tile colspan="4" rowspan="6">
         <mat-card class="example-card">
           <app-movie-card (click)="fetchMovie(movie.id)" [title]="movie.title" [poster]="movie.poster" [year]="movie.year"></app-movie-card>
           <mat-card-actions>

@@ -23,7 +23,7 @@ export class DataService {
   }
 
   getMoviesFromOmdb(){
-    return this.http.get('http://www.omdbapi.com/?s=fast&apikey=6db283eb');
+    return this.http.get('http://www.omdbapi.com/?s=harry&apikey=6db283eb');
   }
 
   saveMovie(movie: Movie): Observable<Movie> {

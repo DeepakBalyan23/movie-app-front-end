@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs';
 import{Router} from '@angular/router';
+import { Movie } from '../movie';
 
 @Component({
   selector: 'app-movies',
@@ -10,14 +11,40 @@ import{Router} from '@angular/router';
 })
 export class MoviesComponent implements OnInit {
   movies$: Object;
+  movie = new Movie();
+  dbMovies:Object;
+  id=10;
   constructor(private data: DataService, private router:Router) { }
 
   ngOnInit() {
-    this.data.getMovies().subscribe(
-      data => this.movies$ = data 
+    this.data.getMoviesFromOmdb().subscribe(
+      data => this.movies$ = data['Search']
     );
+    this.dbMovies=null;
   }
   fetchMovie(id){
     this.router.navigate(['/movie', id]);
+  }
+
+  fetchMovies(){
+    this.data.getMovies().subscribe(
+      data => this.dbMovies = data
+    );
+    this.movies$=null;
+  }
+  saveMovie(movieInput){
+    this.movie.id = this.id++;
+    this.movie.imdbId = movieInput.ImdbID;
+    this.movie.title = movieInput.Title;
+    this.movie.poster = movieInput.Poster;
+    this.movie.year = movieInput.Year;
+    this.data.saveMovie(this.movie).subscribe(
+      data=>this.movie=data
+    );
+  }
+  deleteMovie(movie){
+    this.data.deleteMovie(movie).subscribe(
+      
+    );
   }
 }

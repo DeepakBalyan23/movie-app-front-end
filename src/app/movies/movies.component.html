@@ -2,17 +2,39 @@
   <mat-toolbar-row>
     <span>Movies</span>
     <span class="example-spacer"></span>
-    <mat-icon class="example-icon">favorite</mat-icon>
+    <mat-icon class="example-icon pointer" (click)="fetchMovies()">favorite</mat-icon>
   </mat-toolbar-row>
 </mat-toolbar>
 <br/>
-<div *ngFor="let movie of movies$">
-  <!--  <a routerLink="/details/{{user.id}}">{{ user.name }}</a> -->
-
-  <div>
-    ID: {{ movie.id }}
-    <br/> Name:
-    <a (click)="fetchMovie(movie.id)">{{ movie.title }}</a>
+<mat-grid-list cols="4" rowHeight="100px">
+  <div *ngFor="let movie of movies$">
+    <mat-grid-tile colspan="1" rowspan="6">
+        <mat-card class="example-card">
+            <mat-card-header  >
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>{{movie.Title}}</mat-card-title>
+              <mat-card-subtitle>{{movie.Year}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src={{movie.Poster}} alt="Movie Poster">
+            <mat-card-actions>
+              <button mat-button (click)="saveMovie(movie)">Save</button>
+            </mat-card-actions>
+          </mat-card>
+    </mat-grid-tile>
   </div>
-  <br/>
-</div>
+  <div *ngFor="let movie of dbMovies">
+    <mat-grid-tile colspan="1" rowspan="6">
+        <mat-card class="example-card">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>{{movie.title}}</mat-card-title>
+              <mat-card-subtitle>{{movie.year}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image (clcik)="fetchMovie(movie.id)" src={{movie.poster}} alt="Movie Poster">
+            <mat-card-actions>
+              <button mat-button (click)="deleteMovie(movie)">Delete</button>
+            </mat-card-actions>
+          </mat-card>
+    </mat-grid-tile>
+  </div>
+</mat-grid-list>

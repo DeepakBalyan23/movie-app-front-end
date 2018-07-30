@@ -2,7 +2,7 @@
   <mat-toolbar-row>
     <span>{{ movie.title }}</span>
     <span class="example-spacer"></span>
-    <mat-icon class="example-icon">delete</mat-icon>
+    <mat-icon class="example-icon" (click)="deleteMovie(movie)">delete</mat-icon>
   </mat-toolbar-row>
 </mat-toolbar>
 <div>

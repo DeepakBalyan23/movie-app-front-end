@@ -14,7 +14,7 @@ import{MaterialModule} from './material';
   declarations: [
     AppComponent,
     MoviesComponent,
-    MoviePageComponent
+    MoviePageComponent,
   ],
   imports: [
     FormsModule,

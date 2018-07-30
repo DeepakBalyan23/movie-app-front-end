@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span>Movies</span>
+    <span class="header-title" (click)="fetchOmdbMovies()">Movies</span>
     <span class="example-spacer"></span>
     <mat-icon class="example-icon pointer" (click)="fetchMovies()">favorite</mat-icon>
   </mat-toolbar-row>
@@ -9,32 +9,22 @@
 <mat-grid-list cols="4" rowHeight="100px">
   <div *ngFor="let movie of movies$">
     <mat-grid-tile colspan="1" rowspan="6">
-        <mat-card class="example-card">
-            <mat-card-header  >
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>{{movie.Title}}</mat-card-title>
-              <mat-card-subtitle>{{movie.Year}}</mat-card-subtitle>
-            </mat-card-header>
-            <img mat-card-image src={{movie.Poster}} alt="Movie Poster">
-            <mat-card-actions>
-              <button mat-button (click)="saveMovie(movie)">Save</button>
-            </mat-card-actions>
-          </mat-card>
+      <mat-card class="example-card">
+        <app-movie-card [title]="movie.Title" [poster]="movie.Poster" [year]="movie.Year"></app-movie-card>
+        <mat-card-actions>
+          <button mat-button (click)="saveMovie(movie)">Save</button>
+        </mat-card-actions>
+      </mat-card>
     </mat-grid-tile>
   </div>
   <div *ngFor="let movie of dbMovies">
-    <mat-grid-tile colspan="1" rowspan="6">
+      <mat-grid-tile colspan="1" rowspan="6">
         <mat-card class="example-card">
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>{{movie.title}}</mat-card-title>
-              <mat-card-subtitle>{{movie.year}}</mat-card-subtitle>
-            </mat-card-header>
-            <img mat-card-image (clcik)="fetchMovie(movie.id)" src={{movie.poster}} alt="Movie Poster">
-            <mat-card-actions>
-              <button mat-button (click)="deleteMovie(movie)">Delete</button>
-            </mat-card-actions>
-          </mat-card>
-    </mat-grid-tile>
-  </div>
+          <app-movie-card (click)="fetchMovie(movie.id)" [title]="movie.title" [poster]="movie.poster" [year]="movie.year"></app-movie-card>
+          <mat-card-actions>
+            <button mat-button (click)="deleteMovie(movie)">Delete</button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-grid-tile>
+    </div>
 </mat-grid-list>

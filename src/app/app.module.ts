@@ -9,12 +9,14 @@ import { MoviesComponent } from './movies/movies.component';
 import { MoviePageComponent } from './movie-page/movie-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import{MaterialModule} from './material';
+import { MovieCardComponent } from './movies/movie-card/movie-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MoviesComponent,
     MoviePageComponent,
+    MovieCardComponent,
   ],
   imports: [
     FormsModule,

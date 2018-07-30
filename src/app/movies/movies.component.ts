@@ -13,17 +13,21 @@ export class MoviesComponent implements OnInit {
   movies$: Object;
   movie = new Movie();
   dbMovies:Object;
-  id=10;
+  id=100;
   constructor(private data: DataService, private router:Router) { }
 
   ngOnInit() {
+    this.fetchOmdbMovies();
+  }
+  fetchMovie(id){
+    this.router.navigate(['/movie', id]);
+  }
+
+  fetchOmdbMovies(){
     this.data.getMoviesFromOmdb().subscribe(
       data => this.movies$ = data['Search']
     );
     this.dbMovies=null;
-  }
-  fetchMovie(id){
-    this.router.navigate(['/movie', id]);
   }
 
   fetchMovies(){

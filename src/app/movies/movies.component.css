@@ -6,10 +6,6 @@
   flex: 1 1 auto;
 }
 
-.mat-card-image {
-  height: 400px;
-  width: 350px;
-}
-.pointer {
+.pointer, .example-card, .header-title {
   cursor: pointer;
 }

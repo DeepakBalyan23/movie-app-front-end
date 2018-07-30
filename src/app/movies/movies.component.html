@@ -1,12 +1,18 @@
-<h1>Movies</h1>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Movies</span>
+    <span class="example-spacer"></span>
+    <mat-icon class="example-icon">favorite</mat-icon>
+  </mat-toolbar-row>
+</mat-toolbar>
+<br/>
+<div *ngFor="let movie of movies$">
+  <!--  <a routerLink="/details/{{user.id}}">{{ user.name }}</a> -->
 
-  <div *ngFor="let movie of movies$">
-   <!--  <a routerLink="/details/{{user.id}}">{{ user.name }}</a> -->
-
-    <div>
-      ID: {{ movie.id }}
-      <br/>
-      Name:  <a (click)="fetchMovie(movie.id)">{{ movie.title }}</a>
-    </div>
-    <br/>
+  <div>
+    ID: {{ movie.id }}
+    <br/> Name:
+    <a (click)="fetchMovie(movie.id)">{{ movie.title }}</a>
   </div>
+  <br/>
+</div>

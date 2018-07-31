@@ -22,8 +22,8 @@ export class DataService {
     return this.http.delete('http://localhost:8092/movie/api/v1/movie/'+movie.id)
   }
 
-  getMoviesFromOmdb(){
-    return this.http.get('http://www.omdbapi.com/?s=harry&apikey=6db283eb');
+  getMoviesFromOmdb(title:string){
+    return this.http.get('http://www.omdbapi.com/?s='+title+'&apikey=6db283eb');
   }
 
   saveMovie(movie: Movie): Observable<Movie> {

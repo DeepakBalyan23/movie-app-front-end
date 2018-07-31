@@ -15,18 +15,21 @@ export class MoviesComponent implements OnInit {
   dbMovies:Object;
   id=1000;
   value = '';
+  defaultTitle = 'Harry';
   constructor(private data: DataService, private router:Router, private alert:AlertsService) { }
 
   ngOnInit() {
-    this.fetchOmdbMovies("harry");
+    this.fetchOmdbMovies(this.defaultTitle);
   }
   fetchMovie(id){
     this.router.navigate(['/movie', id]);
   }
 
   fetchOmdbMovies(title){
-    if(!title)
-      title=this.value;
+    if(!title && !this.value){
+      title=this.defaultTitle;
+    }
+    
     this.data.getMoviesFromOmdb(title).subscribe(
       data => this.movies$ = data['Search']
     );

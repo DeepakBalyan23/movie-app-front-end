@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span class="header-title" (click)="fetchOmdbMovies()">Movies</span>
+    <span class="header-title" (click)="fetchOmdbMovies(defaultTitle)">Movies</span>
     <span class="example-spacer"></span>
     <span class="search"><mat-form-field class="example-form-field">
         <input matInput type="text" placeholder="Search" [(ngModel)]="value" (keydown.enter)="fetchOmdbMovies(value)">

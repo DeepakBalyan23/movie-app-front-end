@@ -2,7 +2,12 @@ import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from '../data.service';
 import{Router} from '@angular/router';
 import { Movie } from '../movie';
+//import { OmbdMovie } from '../ombdMovie';
 import { AlertsService } from 'angular-alert-module';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import { OmbdMovie } from '../omdbMovie';
 
 @Component({
   selector: 'app-movies',
@@ -10,27 +15,28 @@ import { AlertsService } from 'angular-alert-module';
   styleUrls: ['./movies.component.css']
 })
 export class MoviesComponent implements OnInit {
-  movies$: Object;
+  movies$=Array<OmbdMovie>();
   movie = new Movie();
   dbMovies:Object;
   id=1000;
-  value = '';
-  defaultTitle = 'Harry';
+  //value = '';
   constructor(private data: DataService, private router:Router, private alert:AlertsService) { }
 
   ngOnInit() {
-    this.fetchOmdbMovies(this.defaultTitle);
+    this.fetchOmdbMovies();
+    this.filteredOptions = this.myControl.valueChanges
+    .pipe(
+      startWith<string | OmbdMovie>(''),
+      map(value => typeof value === 'string' ? value : value.Title),
+      map(Title => Title ? this._filter(Title) : this.movies$.slice())
+    );
   }
   fetchMovie(id){
     this.router.navigate(['/movie', id]);
   }
 
-  fetchOmdbMovies(title){
-    if(!title && !this.value){
-      title=this.defaultTitle;
-    }
-    
-    this.data.getMoviesFromOmdb(title).subscribe(
+  fetchOmdbMovies(){
+    this.data.getMoviesFromOmdb(!this.myControl.value?"Harry":this.myControl.value).subscribe(
       data => this.movies$ = data['Search']
     );
     this.dbMovies=null;
@@ -58,4 +64,17 @@ export class MoviesComponent implements OnInit {
     );
     this.alert.setMessage('Deleted successfully!','success');
   }
+  myControl = new FormControl();
+  filteredOptions: Observable<OmbdMovie[]>;
+
+  displayFn(movie?: OmbdMovie): string | undefined {
+    return movie ? movie.Title : undefined;
+  }
+
+  private _filter(name: string): OmbdMovie[] {
+    const filterValue = name.toLowerCase();
+
+    return this.movies$.filter(option => option.Title.toLowerCase().indexOf(filterValue) === 0);
+  }
+
 }

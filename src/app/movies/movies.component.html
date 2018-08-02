@@ -1,13 +1,17 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span class="header-title" (click)="fetchOmdbMovies(defaultTitle)">Movies</span>
+    <span class="header-title" (click)="fetchOmdbMovies()">Movies</span>
     <span class="example-spacer"></span>
-    <span class="search"><mat-form-field class="example-form-field">
-        <input matInput type="text" placeholder="Search" [(ngModel)]="value" (keydown.enter)="fetchOmdbMovies(value)">
-        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field></span>
+    <span class="search"><form class="example-form">
+        <mat-form-field class="example-full-width">
+          <input type="text" placeholder="Search" aria-label="Movies" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup.enter)="fetchOmdbMovies()">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option.Title}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form></span>
     <mat-icon class="example-icon pointer" (click)="fetchMovies()">favorite</mat-icon>
   </mat-toolbar-row>
 </mat-toolbar>
@@ -34,3 +38,4 @@
       </mat-grid-tile>
     </div>
 </mat-grid-list>
+

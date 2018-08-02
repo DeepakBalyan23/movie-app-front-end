@@ -1,6 +1,6 @@
 export class Movie{
     id:number;
-    title:String;
+    title:string;
     poster:String;
     year:String;
     imdbId:String;
